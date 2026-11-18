@@ -1,5 +1,7 @@
 All parts of this project are protected under the [Creative Commons Attribution 4.0 license](https://creativecommons.org/licenses/by/4.0/).
 # The UnGPU
+NOTICE: I have not actually built this yet, since I am waiting on some parts in the mail. I don't even know if my design works yet!
+
 The UnGPU is a TTL-based monochrome GPU. This project was inspired by Ben Eater's [World's Worst Video Card](https://eater.net/vga) and Leoneq's [iNapGPU](https://github.com/Leoneq/iNapGPU). It is called the "UnGPU" because it can only display text. You cannot change individual pixels with it.
 
 The UnGPU outputs an 800x600 60Hz VGA signal, but the true resolution is only 200x150 pixels. It uses an 8x8 font to display 25x18 characters. The VGA timing circuitry was borrowed from Ben Eater's World's Worst Video Card. Schematics for the horizontal and vertical timing circuits are available on [his website](https://eater.net/vga). The rest of it is in the schematic below:
@@ -50,3 +52,12 @@ To read from VRAM, the computer brings the Memory OE signal low, the Select sign
 <br>
 <br>
 This method of accessing the VRAM has one annoying consequence: Since the GPU cannot control the VRAM address, garbage data will be sent to the monitor while the computer is accessing the VRAM.
+<br>
+## Charset/font
+I haven't made a character set or font yet, but I will soon.
+
+## Why?
+Why? Why did I spend hours designing this? Why didn't I use an FPGA or a microcontroller or something else instead?
+<br>
+<br>
+Because that's not nearly as interesting (and I also know nothing about FPGAs)! The goal of this project isn't to make a good GPU. If that was the goal, I did a pretty terrible job! The goal was to learn more about circuit design and to build something that can generate text on a monitor without using a microcontroller or video controller IC.
