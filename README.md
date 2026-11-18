@@ -5,4 +5,36 @@ The UnGPU is a TTL-based monochrome GPU. It is called the "UnGPU" because it can
 The UnGPU outputs an 800x600 60Hz VGA signal, but the true resolution is only 200x150 pixels. It uses an 8x8 font to display 25x18 characters. The VGA timing circuitry was borrowed from Ben Eater's World's Worst Video Card. Schematics for the horizontal and vertical timing circuits are available on [his website](https://eater.net/vga). The rest of it is in the schematic below:
 
 ![UnGPU main schematic](https://github.com/MISTERPUG51/UnGPU/blob/main/SCH_UnGPU%20Text%20Generator_1-P1_2026-11-17.svg)
+CAB0-9 = Computer Address Bus 0-9
+<br>
+CDB0-7 = Computer Data Bus 0-7
+<br>
+HC0-7 = Horizontal counter bits 0-7
+<br>
+VC0-9 = Vertical counter bits 0-9
+<br>
+CHARA0-9 = Character RAM address bits 0-9
+<br>
+CHARD0-7 = Character RAM data bits 0-7
+<br>
+Memory OE (Active low) = Computer VRAM output enable. Used when the computer wants to read data from VRAM.
+<br>
+Memory WE (Active low) = Computer VRAM write enable. Used when the computer wants to write data to VRAM.
+<br>
+Select = Computer VRAM select signal. Used when the computer is accessing the VRAM.
+## VRAM and Character ROM
+The characters currently being shown on the screen are stored in VRAM. I used an AS7C164A-15 SRAM chip, with the unused address pins tied to ground.
+<br>
+The pixel data for each character is stored in ROM. For this, I used an AT28C64-15 EEPROM.
+
+## Displaying the image
+When the computer is not accessing the VRAM, the UnGPU can output to the display.
+<br>
+<br>
+First, the current character must be read from the VRAM. The top 5 bits of the VRAM address represent the character column (0-24). This number is determined by bits 3-7 of the horizontal counter. The bottom 5 bits of the VRAM address represent the character row (0-17). This number is determined by bits 5-9 of the vertical counter.
+<br>
+<br>
+
+
+
 
