@@ -38,6 +38,7 @@ Next, the pixel data for the current character is read from the ROM. The top 3 b
 <br>
 <br>
 The Character ROM outputs one row of a character at a time: 1 bit for each of the 8 pixels. A 74LS151 8:1 multiplexer selects which of the 8 pixels is sent to the screen. The 3 select inputs of the multiplexer (A-C) are connected to bits 0-2 of the horizontal counter (HC0-HC2). The multiplexer output (Y) is the current pixel to be sent to the monitor. This signal is connected to a 74LS245 buffer, which is disabled during the display blanking intervals. NOTE: You could probably skip this buffer by using a 74LS251 and disabling the output during blanking, but I don't have that chip.
-
-
+<br>
+## Reading from/writing to VRAM
+There are 3 control signals that the computer drives to access the VRAM: Memory OE (active low), Memory WE (active low), and Select.
 
