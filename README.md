@@ -1,5 +1,5 @@
 All parts of this project are protected under the [Creative Commons Attribution 4.0 license](https://creativecommons.org/licenses/by/4.0/).
-# UnGPU
+# The UnGPU
 The UnGPU is a TTL-based monochrome GPU. It is called the "UnGPU" because it can only display text. You cannot change individual pixels with it.
 
 The UnGPU outputs an 800x600 60Hz VGA signal, but the true resolution is only 200x150 pixels. It uses an 8x8 font to display 25x18 characters. The VGA timing circuitry was borrowed from Ben Eater's World's Worst Video Card. Schematics for the horizontal and vertical timing circuits are available on [his website](https://eater.net/vga). The rest of it is in the schematic below:
@@ -43,5 +43,7 @@ The Character ROM outputs one row of a character at a time: 1 bit for each of th
 There are 3 control signals that the computer drives to access the VRAM: Memory OE (active low), Memory WE (active low), and Select.
 <br>
 <br>
-When the computer wants to access the VRAM, it brings the Select signal high. This causes the 3 74LS157 quad multiplexers to connect the VRAM address pins (CHARA0-CHARA9) to the computer address bus (CAB0-CAB9). When the Select signal is high, the character data bus buffer (a 74LS245) is enabled. This buffer connects the VRAM data pins (CHARD0-CHARD7) to the computer data bus (CDB0-CDB7). 
-
+When the computer wants to access the VRAM, it brings the Select signal high. This causes the 3 74LS157 quad multiplexers to connect the VRAM address pins (CHARA0-CHARA9) to the computer address bus (CAB0-CAB9). When the Select signal is high, the character data bus buffer (a 74LS245) is enabled. This buffer connects the VRAM data pins (CHARD0-CHARD7) to the computer data bus (CDB0-CDB7).
+<br>
+<br>
+To read from VRAM, the computer brings the Memory OE signal low, the Select signal high, and the Memory WE signal high. To write to VRAM, the computer first brings all 3 control signals high. Next, the data to be written is put onto the data bus. Once this is complete, the computer momentarily brings the Memory WE signal low to write the data. The Memory OE signal should NEVER be low (enabled) at the same time as the computer is driving the data bus.
