@@ -2,7 +2,7 @@ All parts of this project are protected under the [Creative Commons Attribution 
 # The UnGPU
 NOTICE: I have not actually built this yet, since I am waiting on some parts in the mail. I don't even know if my design works yet!
 
-The UnGPU is a TTL-based monochrome GPU. This project was inspired by Ben Eater's [World's Worst Video Card](https://eater.net/vga) and Leoneq's [iNapGPU](https://github.com/Leoneq/iNapGPU). It is called the "UnGPU" because it can only display text. You cannot change individual pixels with it.
+The UnGPU is a TTL-based monochrome GPU. This project was inspired by Ben Eater's [World's Worst Video Card](https://eater.net/vga) and Leoneq's [iNapGPU](https://github.com/Leoneq/iNapGPU). It is called the "UnGPU" because it can only display text. You can't really display graphics with it.
 
 The UnGPU outputs an 800x600 60Hz VGA signal, but the true resolution is only 200x150 pixels. It uses an 8x8 font to display 25x18 characters. The VGA timing circuitry was borrowed from Ben Eater's World's Worst Video Card. Schematics for the horizontal and vertical timing circuits are available on [his website](https://eater.net/vga). The rest of it is in the schematic below:
 
