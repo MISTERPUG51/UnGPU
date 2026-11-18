@@ -41,4 +41,7 @@ The Character ROM outputs one row of a character at a time: 1 bit for each of th
 <br>
 ## Reading from/writing to VRAM
 There are 3 control signals that the computer drives to access the VRAM: Memory OE (active low), Memory WE (active low), and Select.
+<br>
+<br>
+When the computer wants to access the VRAM, it brings the Select signal high. This causes the 3 74LS157 quad multiplexers to connect the VRAM address pins (CHARA0-CHARA9) to the computer address bus (CAB0-CAB9).
 
