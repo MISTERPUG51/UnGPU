@@ -31,10 +31,13 @@ The pixel data for each character is stored in ROM. For this, I used an AT28C64-
 When the computer is not accessing the VRAM, the UnGPU can output to the display.
 <br>
 <br>
-First, the current character must be read from the VRAM. The top 5 bits of the VRAM address represent the character column (0-24). This number is determined by bits 3-7 of the horizontal counter. The bottom 5 bits of the VRAM address represent the character row (0-17). This number is determined by bits 5-9 of the vertical counter.
+First, the current character must be read from the VRAM. The top 5 bits of the VRAM address (CHARA0-CHARA4) represent the character column (0-24). This number is determined by bits 3-7 of the horizontal counter (HC3-HC7). The bottom 5 bits of the VRAM address (CHARA5-CHARA9) represent the character row (0-17). This number is determined by bits 5-9 of the vertical counter (VC5-VC9).
 <br>
 <br>
-
+Next, the pixel data for the current character is read from the ROM. The top 3 bits of the ROM address (A0-A2) are the current row of pixels (VC2-VC4). The next 8 bits (A3-A10) are the current character from the VRAM (CHARD0-CHARD7).
+<br>
+<br>
+The Character ROM outputs one row of a character at a time: 1 bit for each of the 8 pixels. A 74LS151 8:1 multiplexer selects which of the 8 pixels is sent to the screen. The 3 select inputs of the multiplexer (A-C) are connected to bits 0-2 of the horizontal counter (HC0-HC2). The multiplexer output (Y) is the current pixel to be sent to the monitor. This signal is connected to a 74LS245 buffer, which is disabled during the display blanking intervals. NOTE: You could probably skip this buffer by using a 74LS251 and disabling the output during blanking, but I don't have that chip.
 
 
 
